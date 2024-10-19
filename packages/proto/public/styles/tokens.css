@@ -6,9 +6,10 @@
     --color-link: #00CED1;
     --color-link-hover: #008b27;
 
-    --font-family-default: Arial, sans-serif;
+    --font-family-body: 'Roboto', sans-serif;
+    --font-family-heading: 'Merriweather', serif;
     --font-size-base: 16px;
-    --font-size-large: 20px;
+    --font-size-large: 24px;
     --font-size-small: 12px;
 
     --padding-default: 10px;

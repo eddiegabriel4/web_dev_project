@@ -1,7 +1,9 @@
+/* CSS for all pages using design tokens */
 body {
     background-color: var(--color-background-page);
     color: var(--color-text-default);
-    font-family: var(--font-family-default);
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-base);
     margin: 0;
     padding: 0;
 }
@@ -10,6 +12,12 @@ header {
     color: var(--color-text-header);
     padding: var(--padding-default);
     text-align: center;
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-large);
+}
+h1, h2, h3 {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-large);
 }
 a {
     color: var(--color-link);
@@ -17,5 +25,12 @@ a {
 }
 a:hover {
     color: var(--color-link-hover);
+}
+svg.icon {
+  display: inline;
+  height: 10em;
+  width: 10em;
+  vertical-align: top;
+  fill: currentColor;
 }
 

@@ -1,0 +1,21 @@
+body {
+    background-color: var(--color-background-page);
+    color: var(--color-text-default);
+    font-family: var(--font-family-default);
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: var(--color-background-header);
+    color: var(--color-text-header);
+    padding: var(--padding-default);
+    text-align: center;
+}
+a {
+    color: var(--color-link);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--color-link-hover);
+}
+

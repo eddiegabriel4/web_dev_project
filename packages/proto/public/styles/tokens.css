@@ -1,0 +1,16 @@
+:root {
+    --color-background-page: #1E1F26;
+    --color-background-header: #3E3E72;
+    --color-text-default: #F5F5F5;
+    --color-text-header: #FFD700;
+    --color-link: #00CED1;
+    --color-link-hover: #008b27;
+
+    --font-family-default: Arial, sans-serif;
+    --font-size-base: 16px;
+    --font-size-large: 20px;
+    --font-size-small: 12px;
+
+    --padding-default: 10px;
+    --padding-large: 20px;
+}

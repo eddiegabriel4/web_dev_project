@@ -2,17 +2,13 @@
   "name": "web_dev_project",
   "version": "1.0.0",
   "description": "",
-  "main": "public/index.html",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "workspaces": [
-    "packages/*"
-  ],
-  "dependencies": {
-    "http-server": "^14.1.1"
-  }
+      "packages/*"
+  ]
 }

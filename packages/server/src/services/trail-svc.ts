@@ -2,6 +2,7 @@
 import { Schema, model } from "mongoose";
 import { Trail } from "../models";
 
+//not being used anymore
 const Trails: Record<string, Trail> = {
     bearTrail: {
         name: "Bear Trail",

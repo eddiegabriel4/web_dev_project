@@ -1,12 +1,11 @@
 import { css, html, shadow } from "@calpoly/mustang";
-import reset from "./styles/reset.css.js";
 
 export class TrailCard extends HTMLElement {
   static template = html`
   <template>
     <div class="card">
-      <h2 class="card-title"><slot name="title">Default Title</slot></h2>
-      <p class="card-content"><slot name="content">Default Content</slot></p>
+      <h2 class="card-title"><slot name="name">Default Title</slot></h2>
+      <p class="card-content"><slot name="description">Default Content</slot></p>
       <p class="card-content location">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 4.71 7 13 7 13s7-8.29 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -18,6 +17,7 @@ export class TrailCard extends HTMLElement {
           <ul class="nav-list">
             <li><a href="#">Default Link 1</a></li>
             <li><a href="#">Default Link 2</a></li>
+            <li><a href="#">Default Link 3</a></li>
           </ul>
         </slot>
       </nav>
@@ -85,6 +85,67 @@ export class TrailCard extends HTMLElement {
     fill: var(--color-link);
   }
 `;
+
+  get src() {
+    return this.getAttribute("src");
+  }
+
+  connectedCallback() {
+    if (this.src) this.hydrate(this.src);
+  }
+
+  hydrate(url) {
+    console.log("Fetching data from:", url);
+    fetch(url)
+      .then((res) => {
+        if (res.status !== 200) throw `Status: ${res.status}`;
+        return res.json();
+      })
+      .then((json) => {
+        this.renderSlots(json);
+      })
+      .catch((error) =>
+        console.log(`Failed to render data from ${url}:`, error)
+      );
+  }
+
+  renderSlots(json) {
+
+    const defaultLinks = [
+      { href: "groups.html", text: "Hiking Groups" },
+      { href: "gear.html", text: "Gear" },
+      { href: "viewpoints.html", text: "Viewpoints" }
+    ];
+
+    const entries = Object.entries(json);
+    const toSlot = ([key, value]) => html`<span slot="${key}">${value}</span>`;
+
+    const fragment = entries.map(toSlot);
+
+    //inserting the current default links into the trail card
+    if (!json.nav) {
+      const navList = document.createElement("ul");
+      navList.className = "nav-list";
+
+      defaultLinks.forEach(link => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = link.href;
+        a.textContent = link.text;
+        li.appendChild(a);
+        navList.appendChild(li);
+      });
+
+      const navSlot = document.createElement("nav");
+      navSlot.setAttribute("slot", "nav");
+      navSlot.appendChild(navList);
+
+      fragment.push(navSlot);
+    }
+
+    this.replaceChildren(...fragment);
+  }
+
 
   constructor() {
     super();

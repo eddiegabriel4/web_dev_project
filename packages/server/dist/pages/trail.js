@@ -63,19 +63,10 @@ class TrailPage {
   renderBody() {
     const { name, description, location } = this.data;
     return import_server.html`
-    <trail-card>
-    <span slot="title">${name}</span>
-    <span slot="content">${description}</span>
-    <span slot="location">${location}</span>
-    <nav slot="nav">
-      <ul class="nav-list">
-        <li><a href="groups.html">Hiking Groups</a></li>
-        <li><a href="gear.html">Gear</a></li>
-        <li><a href="viewpoints.html">Viewpoints</a></li>
-      </ul>
-    </nav>
-  </trail-card>
-    `;
+            <trail-card src="/api/trails/${name}">
+                <!-- Remove or comment out slot content -->
+            </trail-card>
+        `;
   }
 }
 // Annotate the CommonJS export names for ESM import in node:

@@ -18,10 +18,13 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var trail_svc_exports = {};
 __export(trail_svc_exports, {
-  getTrail: () => getTrail
+  default: () => trail_svc_default,
+  getTrail: () => getTrail,
+  index: () => index
 });
 module.exports = __toCommonJS(trail_svc_exports);
-const trails = {
+var import_mongoose = require("mongoose");
+const Trails = {
   bearTrail: {
     name: "Bear Trail",
     description: "Hike near some dangerous little guys",
@@ -38,10 +41,28 @@ const trails = {
     location: "Olympic National Park"
   }
 };
-function getTrail(trailId) {
-  return trails[trailId] || trails["forestTrail"];
+const TrailSchema = new import_mongoose.Schema(
+  {
+    name: String,
+    description: String,
+    location: String
+  },
+  { collection: "trails_collection" }
+);
+const TrailModel = (0, import_mongoose.model)("Trail", TrailSchema);
+function index() {
+  return TrailModel.find().exec();
 }
+function getTrail(trailId) {
+  return TrailModel.findOne({ name: trailId }).exec().then((trail) => trail || {
+    name: "Default Trail",
+    description: "Default description",
+    location: "Default location"
+  });
+}
+var trail_svc_default = { index, getTrail };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  getTrail
+  getTrail,
+  index
 });

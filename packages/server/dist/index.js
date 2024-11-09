@@ -22,24 +22,21 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var import_express = __toESM(require("express"));
-var import_trail_svc = require("./services/trail-svc");
 var import_trail = require("./pages/trail");
+var import_mongo = require("./services/mongo");
+var import_trail_svc = __toESM(require("./services/trail-svc"));
+(0, import_mongo.connect)("cluster0");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
-const staticDir = "../proto/public";
-app.use(import_express.default.static(staticDir));
+app.use(import_express.default.static("../proto/public"));
 app.get("/trails/:trailId", (req, res) => {
   const { trailId } = req.params;
-  const trail = (0, import_trail_svc.getTrail)(trailId);
-  if (trail) {
-    const page = new import_trail.TrailPage(trail);
+  import_trail_svc.default.getTrail(trailId).then((data) => {
+    const page = new import_trail.TrailPage(data);
     res.set("Content-Type", "text/html").send(page.render());
-  } else {
+  }).catch((err) => {
     res.status(404).send("Trail not found");
-  }
-});
-app.get("/hello", (req, res) => {
-  res.send("Hello, World");
+  });
 });
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

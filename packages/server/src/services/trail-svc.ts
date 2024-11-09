@@ -1,7 +1,8 @@
 // server/src/services/trail-svc.ts
+import { Schema, model } from "mongoose";
 import { Trail } from "../models";
 
-const trails: Record<string, Trail> = {
+const Trails: Record<string, Trail> = {
   bearTrail: {
     name: "Bear Trail",
     description: "Hike near some dangerous little guys",
@@ -19,7 +20,32 @@ const trails: Record<string, Trail> = {
   }
 };
 
-export function getTrail(trailId: string): Trail {
-  // Returns a trail based on the given trailId or a default trail
-  return trails[trailId] || trails["forestTrail"];
-}
+const TrailSchema = new Schema<Trail>(
+    {
+      name: String,
+      description: String,
+      location: String
+    },
+    { collection: "trails_collection" }
+  );
+
+  const TrailModel = model<Trail>("Trail", TrailSchema);
+
+
+
+
+// fetch all trails from the database
+export function index(): Promise<Trail[]> {
+    return TrailModel.find().exec();
+  }
+  
+  export function getTrail(trailId: string): Promise<Trail> {
+    return TrailModel.findOne({ name: trailId }).exec()
+      .then((trail) => trail || {
+        name: "Default Trail",
+        description: "Default description",
+        location: "Default location"
+      });
+  }
+
+  export default { index, getTrail };

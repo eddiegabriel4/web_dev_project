@@ -1,28 +1,27 @@
 // server/src/index.ts
 import express, { Request, Response } from "express";
-import { getTrail } from "./services/trail-svc";
 import { TrailPage } from "./pages/trail";
+import { connect } from "./services/mongo";
+import Trails from "./services/trail-svc";
+
+connect("cluster0");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const staticDir = "../proto/public";
-app.use(express.static(staticDir));
+app.use(express.static("../proto/public"));
 
 app.get("/trails/:trailId", (req: Request, res: Response) => {
   const { trailId } = req.params;
-  const trail = getTrail(trailId);
 
-  if (trail) {
-    const page = new TrailPage(trail);
-    res.set("Content-Type", "text/html").send(page.render());
-  } else {
+  Trails.getTrail(trailId).then((data) => {
+    const page = new TrailPage(data);
+    res
+      .set("Content-Type", "text/html")
+      .send(page.render());
+  }).catch((err) => {
     res.status(404).send("Trail not found");
-  }
-});
-
-app.get("/hello", (req: Request, res: Response) => {
-    res.send("Hello, World");
+  });
 });
 
 app.listen(port, () => {

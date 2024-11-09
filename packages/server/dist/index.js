@@ -25,10 +25,13 @@ var import_express = __toESM(require("express"));
 var import_trail = require("./pages/trail");
 var import_mongo = require("./services/mongo");
 var import_trail_svc = __toESM(require("./services/trail-svc"));
+var import_trails = require("./routes/trails");
 (0, import_mongo.connect)("cluster0");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
+app.use(import_express.default.json());
 app.use(import_express.default.static("../proto/public"));
+app.use("/api/trails", import_trails.trails);
 app.get("/trails/:trailId", (req, res) => {
   const { trailId } = req.params;
   import_trail_svc.default.getTrail(trailId).then((data) => {

@@ -18,9 +18,12 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var trail_svc_exports = {};
 __export(trail_svc_exports, {
+  createTrail: () => createTrail,
   default: () => trail_svc_default,
   getTrail: () => getTrail,
-  index: () => index
+  index: () => index,
+  removeTrail: () => removeTrail,
+  updateTrail: () => updateTrail
 });
 module.exports = __toCommonJS(trail_svc_exports);
 var import_mongoose = require("mongoose");
@@ -50,19 +53,40 @@ const TrailSchema = new import_mongoose.Schema(
   { collection: "trails_collection" }
 );
 const TrailModel = (0, import_mongoose.model)("Trail", TrailSchema);
+function createTrail(json) {
+  const newTrail = new TrailModel(json);
+  return newTrail.save();
+}
 function index() {
   return TrailModel.find().exec();
 }
 function getTrail(trailId) {
-  return TrailModel.findOne({ name: trailId }).exec().then((trail) => trail || {
+  const decodedTrailId = decodeURIComponent(trailId);
+  return TrailModel.findOne({ name: decodedTrailId }).exec().then((trail) => trail || {
     name: "Default Trail",
     description: "Default description",
     location: "Default location"
   });
 }
-var trail_svc_default = { index, getTrail };
+function updateTrail(trailId, trail) {
+  const decodedTrailId = decodeURIComponent(trailId);
+  return TrailModel.findOneAndUpdate({ name: decodedTrailId }, trail, { new: true }).then((updatedTrail) => {
+    if (!updatedTrail) throw `${decodedTrailId} not updated`;
+    return updatedTrail;
+  });
+}
+function removeTrail(trailId) {
+  const decodedTrailId = decodeURIComponent(trailId);
+  return TrailModel.findOneAndDelete({ name: decodedTrailId }).then((deletedTrail) => {
+    if (!deletedTrail) throw `${decodedTrailId} not deleted`;
+  });
+}
+var trail_svc_default = { index, getTrail, createTrail, updateTrail, removeTrail };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  createTrail,
   getTrail,
-  index
+  index,
+  removeTrail,
+  updateTrail
 });

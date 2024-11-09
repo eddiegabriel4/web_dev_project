@@ -1,10 +1,15 @@
+/* Default (light mode) colors */
 :root {
-    --color-background-page: #1E1F26;
+    --color-background-page: #ffffff;
     --color-background-header: #3E3E72;
-    --color-text-default: #F5F5F5;
+    --color-text-default: #000000;
     --color-text-header: #FFD700;
     --color-link: #00CED1;
     --color-link-hover: #008b27;
+
+    --color-background-card: #f8f8f8;
+    --color-accent: #007bff;
+    --color-text-control: #333333;
 
     --font-family-body: 'Roboto', sans-serif;
     --font-family-heading: 'Merriweather', serif;
@@ -15,3 +20,19 @@
     --padding-default: 10px;
     --padding-large: 20px;
 }
+
+/* Dark mode overrides */
+body.dark-mode {
+    --color-background-page: #1E1F26;
+    --color-background-header: #3E3E72;
+    --color-text-default: #F5F5F5;
+    --color-text-header: #FFD700;
+    --color-link: #00CED1;
+    --color-link-hover: #f5f5f5;
+
+    --color-background-card: #333333;
+    --color-accent: #ff4081;
+    --color-text-control: #cccccc;
+}
+
+  

@@ -10,49 +10,68 @@
     <link rel="stylesheet" href="./styles/reset.css" />
     <link rel="stylesheet" href="./styles/tokens.css" />
     <link rel="stylesheet" href="./styles/page.css" />
+
+    <script type="importmap">
+        {
+          "imports": {
+            "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+          }
+        }
+    </script>
+    <script type="module">
+        import { define } from "@calpoly/mustang";
+        import { TrailCard } from "/scripts/trail-card.js";
+      
+        define({
+          "trail-card": TrailCard
+        });
+    </script>
+
 </head>
 <body>
     <header>
         <div class="logo">Hiking Trails</div>
     </header>
-    <p class="trail-details">Here you will find a list of all trails</p>
+    <p class="trail-details">Here is a list of all trails</p>
 
-    <div class="card">
-        <h2 class="card-title">Bear Trail</h2>
-        <p class="card-content">Hike near some dangerous guys</p>
-        <nav class="card-nav">
-            <ul class="nav-list">
-                <li><a href="groups.html">Hiking Groups</a></li>
-                <li><a href="gear.html">Gear</a></li>
-                <li><a href="viewpoints.html">Viewpoints</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <div class="card">
-        <h2 class="card-title">Granite Trail</h2>
-        <p class="card-content">View the mighty granite peaks</p>
-        <nav class="card-nav">
-            <ul class="nav-list">
-                <li><a href="groups.html">Hiking Groups</a></li>
-                <li><a href="gear.html">Gear</a></li>
-                <li><a href="viewpoints.html">Viewpoints</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <div class="card">
-        <h2 class="card-title">Forest Trail</h2>
-        <p class="card-content">Get lost in a serene forest</p>
-        <nav class="card-nav">
-            <ul class="nav-list">
-                <li><a href="groups.html">Hiking Groups</a></li>
-                <li><a href="gear.html">Gear</a></li>
-                <li><a href="viewpoints.html">Viewpoints</a></li>
-            </ul>
-        </nav>
-    </div>
-    
+    <!-- First Card: Bear Trail -->
+<trail-card>
+    <span slot="title">Bear Trail</span>
+    <span slot="content">Hike near some dangerous guys</span>
+    <nav slot="nav">
+      <ul class="nav-list">
+        <li><a href="groups.html">Hiking Groups</a></li>
+        <li><a href="gear.html">Gear</a></li>
+        <li><a href="viewpoints.html">Viewpoints</a></li>
+      </ul>
+    </nav>
+  </trail-card>
+  
+  <!-- Second Card: Granite Trail -->
+  <trail-card>
+    <span slot="title">Granite Trail</span>
+    <span slot="content">View the mighty granite peaks</span>
+    <nav slot="nav">
+      <ul class="nav-list">
+        <li><a href="groups.html">Hiking Groups</a></li>
+        <li><a href="gear.html">Gear</a></li>
+        <li><a href="viewpoints.html">Viewpoints</a></li>
+      </ul>
+    </nav>
+  </trail-card>
+  
+  <!-- Third Card: Forest Trail -->
+  <trail-card>
+    <span slot="title">Forest Trail</span>
+    <span slot="content">Get lost in a serene forest</span>
+    <nav slot="nav">
+      <ul class="nav-list">
+        <li><a href="groups.html">Hiking Groups</a></li>
+        <li><a href="gear.html">Gear</a></li>
+        <li><a href="viewpoints.html">Viewpoints</a></li>
+      </ul>
+    </nav>
+  </trail-card>
     
     <a href="index.html">Back to Hiking Overview</a>
 </body>

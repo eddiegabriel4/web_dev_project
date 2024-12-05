@@ -1,6 +1,10 @@
 import { css, html, shadow } from "@calpoly/mustang";
+import { Observer } from "@calpoly/mustang";
 
 export class TrailCard extends HTMLElement {
+
+  _authObserver = new Observer(this, "blazing:auth");
+
   static template = html`
   <template>
     <div class="card">
@@ -90,13 +94,35 @@ export class TrailCard extends HTMLElement {
     return this.getAttribute("src");
   }
 
+  // Getter for the Authorization header
+  get authorization() {
+    return (
+      this._user?.authenticated && {
+        Authorization: `Bearer ${this._user.token}`
+      }
+    );
+  }
+
+  // connectedCallback() {
+  //   if (this.src) this.hydrate(this.src);
+  // }
+
   connectedCallback() {
+    this._authObserver.observe(({ user }) => {
+      this._user = user;
+      console.log("Updated user authentication state:", this._user);
+    });
+
     if (this.src) this.hydrate(this.src);
   }
 
   hydrate(url) {
     console.log("Fetching data from:", url);
-    fetch(url)
+    fetch(url, {
+      headers: {
+        ...this.authorization
+      }
+    })
       .then((res) => {
         if (res.status !== 200) throw `Status: ${res.status}`;
         return res.json();
@@ -122,7 +148,7 @@ export class TrailCard extends HTMLElement {
 
     const fragment = entries.map(toSlot);
 
-    //inserting the current default links into the trail card
+    // Inserting the current default links into the trail card
     if (!json.nav) {
       const navList = document.createElement("ul");
       navList.className = "nav-list";

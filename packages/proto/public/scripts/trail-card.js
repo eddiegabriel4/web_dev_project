@@ -94,27 +94,34 @@ export class TrailCard extends HTMLElement {
     return this.getAttribute("src");
   }
 
-  // Getter for the Authorization header
   get authorization() {
-    return (
-      this._user?.authenticated && {
-        Authorization: `Bearer ${this._user.token}`
-      }
-    );
+    if (!this._user?.authenticated) {
+      console.warn("Authorization requested but user is not authenticated.");
+      return {};
+    }
+  
+    console.log("Authorization getter called, user:", this._user);
+    return {
+      Authorization: `Bearer ${this._user.token}`,
+    };
   }
-
-  // connectedCallback() {
-  //   if (this.src) this.hydrate(this.src);
-  // }
 
   connectedCallback() {
+    // Observe the blazing:auth context
     this._authObserver.observe(({ user }) => {
+      console.log("Updated user authentication state:", user);
       this._user = user;
-      console.log("Updated user authentication state:", this._user);
+  
+      if (this.src && user?.authenticated) {
+        this.hydrate(this.src);
+      }
     });
-
-    if (this.src) this.hydrate(this.src);
+  
+    if (this.src && !this._user?.authenticated) {
+      console.log("Waiting for user authentication before fetching data...");
+    }
   }
+  
 
   hydrate(url) {
     console.log("Fetching data from:", url);

@@ -13,7 +13,9 @@ const router = express.Router();
 
 dotenv.config();
 const TOKEN_SECRET: string =
-process.env.TOKEN_SECRET || "NOT_A_SECRET";
+process.env.TOP_SECRET || "NOT_A_SECRET";
+
+console.log(TOKEN_SECRET);
 
 
 
@@ -34,6 +36,8 @@ router.post("/register", (req: Request, res: Response) => {
 
 
 router.post("/login", (req: Request, res: Response) => {
+  console.log("Login endpoint hit!");
+
     const { username, password } = req.body; // from form
   
     if (!username || !password) {

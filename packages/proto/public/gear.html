@@ -13,6 +13,18 @@
     
     <script src="/scripts/dark-mode-toggle.js" type="module"></script>
 
+    <script type="module">
+        import { define, Auth } from "@calpoly/mustang";
+        import { HeaderElement } from "/scripts/header.js";
+      
+        define({
+          "blz-header": HeaderElement,
+          "mu-auth": Auth.Provider
+        });
+      
+        HeaderElement.initializeOnce();
+    </script>
+
 </head>
 <body>
     <header>

@@ -55,7 +55,7 @@ export class LoginPage {
               <blz-header> </blz-header>
               <main class="page">
                 <login-form api="/auth/login">
-                  <h3 slot="title">Sign in and go places!</h3>
+                  <h3 slot="title">Sign in and check out some awesome hikes!</h3>
                 </login-form>
                 <p class="register">
                   Or did you want to
@@ -92,7 +92,7 @@ export class LoginPage {
               <main class="page">
                 <registration-form api="/auth/register">
                   <h3 slot="title"
-                    >Sign up to plan your next trip!</h3
+                    >Sign up to plan your next hike!</h3
                   >
                 </registration-form>
                 <p class="login">

@@ -29,9 +29,23 @@
 
     <script src="/scripts/dark-mode-toggle.js" type="module"></script>
 
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+      import { HeaderElement } from "/scripts/header.js";
+    
+      define({
+        "blz-header": HeaderElement,
+        "mu-auth": Auth.Provider
+      });
+    
+      HeaderElement.initializeOnce();
+  </script>
+
 
 </head>
 <body>
+  <mu-auth provides="blazing:auth">
+
     <header>
         <div class="logo">Hiking Trails</div>
         <label>
@@ -93,6 +107,9 @@
 
     
     <a href="index.html">Back to Hiking Overview</a>
+
+  </mu-auth>
+
 </body>
 
 </html>

@@ -17,7 +17,7 @@ import {
   
     static template = html`<template>
       <header>
-        <h1>Blazing Travels</h1>
+        <h1>PNW Hikes</h1>
         <nav>
           <p><slot> Unnamed Tour </slot></p>
           <mu-dropdown>

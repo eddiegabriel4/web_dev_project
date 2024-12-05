@@ -38,7 +38,8 @@ var import_jsonwebtoken = __toESM(require("jsonwebtoken"));
 var import_credential_svc = __toESM(require("../services/credential-svc"));
 const router = import_express.default.Router();
 import_dotenv.default.config();
-const TOKEN_SECRET = process.env.TOKEN_SECRET || "NOT_A_SECRET";
+const TOKEN_SECRET = process.env.TOP_SECRET || "NOT_A_SECRET";
+console.log(TOKEN_SECRET);
 router.post("/register", (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
@@ -50,6 +51,7 @@ router.post("/register", (req, res) => {
   }
 });
 router.post("/login", (req, res) => {
+  console.log("Login endpoint hit!");
   const { username, password } = req.body;
   if (!username || !password) {
     res.status(400).send("Bad request: Invalid input data.");

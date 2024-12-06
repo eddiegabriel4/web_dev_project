@@ -19,7 +19,6 @@ import {
       <header>
         <h1>PNW Hikes</h1>
         <nav>
-          <p><slot> Unnamed Tour </slot></p>
           <mu-dropdown>
             <a slot="actuator">
               Hello,
@@ -74,7 +73,7 @@ import {
         cursor: pointer;
       }
       #userid:empty::before {
-        content: "traveler";
+        content: "hiker";
       }
       menu a {
         color: var(--color-link);
@@ -85,6 +84,109 @@ import {
       a:has(#userid:not(:empty)) ~ menu > .when-signed-out {
         display: none;
       }
+
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  
+  body {
+      background-color: var(--color-background-page);
+      color: var(--color-text-default);
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-base);
+      max-width: 1200px; 
+      margin: 0 auto;
+      padding: var(--padding-default);
+  }
+  
+  header {
+      display: flex; 
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--padding-default);
+      background-color: var(--color-background-header);
+      color: var(--color-text-header);
+      font-family: var(--font-family-heading);
+  }
+  
+  header img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+  }
+  
+  .nav-list {
+      display: flex; 
+      gap: var(--padding-default); 
+      list-style: none;
+  }
+  
+  .nav-list a {
+      text-decoration: none;
+      color: var(--color-text-header);
+      padding: var(--padding-small) var(--padding-default);
+  }
+  
+  .card-container {
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--padding-default); 
+      padding: var(--padding-default);
+  }
+  
+  .card {
+      border: 1px solid var(--color-link);
+      border-radius: 8px;
+      padding: var(--padding-default);
+      background-color: var(--color-background-header);
+      color: var(--color-text-default);
+      transition: transform 0.2s; 
+  }
+  
+  .card:hover {
+      transform: scale(1.05);
+  }
+  
+  .card-title {
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-large);
+      margin-bottom: var(--padding-small);
+  }
+  
+  .card-content {
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-base);
+  }
+  
+  a {
+      color: var(--color-link);
+      text-decoration: none;
+      display: block;
+      margin-top: var(--padding-large);
+  }
+  
+  a:hover {
+      color: var(--color-link-hover);
+  }
+  
+  .trail-details {
+      margin-bottom: var(--padding-large);
+  }
+  
+  ul {
+      margin-top: var(--padding-default);
+  }
+  
+  svg.icon {
+      display: inline;
+      height: 20em; 
+      width: 20em;
+      vertical-align: middle;
+      fill: currentColor; 
+  }
+  
     `;
   
     get userid() {

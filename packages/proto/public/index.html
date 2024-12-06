@@ -11,8 +11,14 @@
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/page.css" />
 
-    <script src="/scripts/dark-mode-toggle.js" type="module"></script>
-
+    <script type="importmap">
+        {
+          "imports": {
+            "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+          }
+        }
+    </script>
+    
     <script type="module">
         import { define, Auth } from "@calpoly/mustang";
         import { HeaderElement } from "/scripts/header.js";
@@ -29,16 +35,21 @@
 
 
     <mu-auth provides="blazing:auth">
+
+        <blz-header></blz-header>
+
     
         <main class="page">
-            <header>
-                <div class="logo">Hiking Overview</div>
+            <!-- <header>
+                <div class="logo">Hiking Overview 77</div>
         
                 <label>
                     <input type="checkbox" id="dark-mode-toggle" autocomplete="off" />
                     Dark mode
                 </label>
-            </header>
+            </header> -->
+
+
             <p>Explore different trails, gear, viewpoints, and groups!
                 <svg class="icon">
                     <use href="/icons/hiking.svg#hiking-guy" />

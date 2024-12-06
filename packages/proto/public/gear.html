@@ -13,6 +13,14 @@
     
     <script src="/scripts/dark-mode-toggle.js" type="module"></script>
 
+    <script type="importmap">
+        {
+          "imports": {
+            "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+          }
+        }
+    </script>
+    
     <script type="module">
         import { define, Auth } from "@calpoly/mustang";
         import { HeaderElement } from "/scripts/header.js";

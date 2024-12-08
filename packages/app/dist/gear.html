@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gear</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    
+    <script src="/scripts/dark-mode-toggle.js" type="module"></script>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+          }
+        }
+    </script>
+    
+    <script type="module">
+        import { define, Auth } from "@calpoly/mustang";
+        import { HeaderElement } from "/scripts/header.js";
+      
+        define({
+          "blz-header": HeaderElement,
+          "mu-auth": Auth.Provider
+        });
+      
+        HeaderElement.initializeOnce();
+    </script>
+
+</head>
+<body>
+    <header>
+        <div class="logo">Hiking Gear</div>
+        <label>
+            <input type="checkbox" id="dark-mode-toggle" autocomplete="off" />
+            Dark mode
+        </label>
+    </header>
+    <ul>
+        <li>Clothes: Lightweight jacket, hiking boots</li>
+        <li>Tools: Hiking poles, water filter</li>
+        <li>Food: Energy bars, water bottles</li>
+    </ul>
+    <a href="trails.html">Back to Trails</a>
+</body>
+</html>

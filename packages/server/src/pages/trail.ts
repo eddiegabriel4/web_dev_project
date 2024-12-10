@@ -1,7 +1,7 @@
 // server/src/pages/trail-page.ts
 import { css, html } from "@calpoly/mustang/server";
 import { Trail } from "../models";
-import renderPage from "./renderPage"; // generic page renderer
+import renderPage from "./renderPage";
 
 export class TrailPage {
     data: Trail;
@@ -24,7 +24,7 @@ export class TrailPage {
             ],
             scripts: [
                 `import { define } from "@calpoly/mustang";
-        import { TrailElement } from "/scripts/trail-element.js";
+                 import { TrailElement } from "/scripts/trail-element.js";
 
         define({
           "trail-element": TrailElement
@@ -36,9 +36,7 @@ export class TrailPage {
     renderBody() {
         const { name, description, location } = this.data;
         return html`
-            <trail-card src="/api/trails/${name}">
-                <!-- Remove or comment out slot content -->
-            </trail-card>
+            <trail-card src="/api/trails/${name}"></trail-card>
         `;
     }
 }

@@ -52,7 +52,7 @@ class TrailPage {
       ],
       scripts: [
         `import { define } from "@calpoly/mustang";
-        import { TrailElement } from "/scripts/trail-element.js";
+                 import { TrailElement } from "/scripts/trail-element.js";
 
         define({
           "trail-element": TrailElement

@@ -15,21 +15,22 @@ export class HomeViewElement extends LitElement {
             : html`<p>Loading trails...</p>`;
 
         return html`
-      <main class="page">
+        <main class="page">
         <header>
-          <h2>Your Trips</h2>
+          <h1>Welcome to your center for all things trails in the Pacific Northwest</h1>
+          <p>
+            <a href="/trails.html" class="trails-link">Click here to see all trails</a>
+          </p>
         </header>
-        <dl>${trailList}</dl>
       </main>
     `;
     }
 
     renderItem(trail: Trail) {
         return html`
-      <div class="trail-item">
-        <dt>${trail.name}</dt>
-        <dd>${trail.description}</dd>
-      </div>
+      <trail-card 
+          src="/api/trails/${trail.name}">
+      </trail-card>
     `;
     }
 
@@ -42,9 +43,7 @@ export class HomeViewElement extends LitElement {
                 throw `Server responded with status ${res.status}`;
             })
             .then((json: Array<Trail>) => {
-                console.log("Fetched JSON:", json); // Log the raw JSON
-                this.trailIndex = json || []; // Directly assign the array to trailIndex
-                console.log("Updated trailIndex:", this.trailIndex);
+                this.trailIndex = json || [];
             })
             .catch((err) => console.error("Failed to fetch trail data:", err));
     }

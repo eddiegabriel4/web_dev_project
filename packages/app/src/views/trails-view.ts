@@ -21,6 +21,7 @@ export class TrailViewElement extends LitElement {
           <section class="trail-list">
                 ${trailList}
         </section>
+
         </header>
       </main>
     `;
@@ -31,6 +32,9 @@ export class TrailViewElement extends LitElement {
       <trail-card 
           src="/api/trails/${trail.name}">
       </trail-card>
+
+      <trail-message-view trailID="${trail.name}"></trail-message-view>
+
     `;
     }
 

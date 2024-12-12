@@ -13,19 +13,21 @@
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/page.css" />
 
-    <script type="module" crossorigin src="/assets/index-BInLORrB.js"></script>
+    <script type="module" crossorigin src="/assets/index-Bk3Tqdhe.js"></script>
   </head>
 
   <body>
     <mu-history provides="blazing:history">
-    <mu-auth provides="blazing:auth">
-      <article>
-        <blazing-header></blazing-header>
-        <!-- <blazing-app></blazing-app> -->
-        <mu-switch></mu-switch>
-      </article>
+    <mu-auth provides="blazing:auth" redirect="/login">
+      <mu-store provides="blazing:model">
+        <article>
+          <blazing-header></blazing-header>
+          <!-- <blazing-app></blazing-app> -->
+          <mu-switch></mu-switch>
+        </article>
+      </mu-store>
     </mu-auth>
-  </mu-history>
+    </mu-history>
   </body>
   
 </html>

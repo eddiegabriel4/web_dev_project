@@ -1,5 +1,8 @@
 // main.ts
-import { Auth, define, History, Switch } from "@calpoly/mustang";
+import { Auth, define, History, Switch, Store } from "@calpoly/mustang";
+import { Msg } from "./messages.ts";
+import { Model, init } from "./model.ts";
+import update from "./update.ts";
 import { html, LitElement } from "lit";
 import { HeaderElement } from "./components/blazing-header";
 import { TrailCard } from "./components/trail-card";
@@ -8,6 +11,8 @@ import { TrailViewElement } from "./views/trails-view";
 import { GearView } from "./views/gear";
 import { GroupsView } from "./views/groups";
 import { ViewpointsView } from "./views/viewpoints";
+import { TrailUsingMessagesViewElement } from "./views/trail-card-using-messages.ts";
+
 
 
 
@@ -17,7 +22,8 @@ class AppElement extends LitElement {
     "trails-view": TrailViewElement,
     "gear-view": GearView,
     "groups-view": GroupsView,
-    "viewpoints-view": ViewpointsView
+    "viewpoints-view": ViewpointsView,
+    "trail-message-view": TrailUsingMessagesViewElement
   });
 
   protected render() {
@@ -78,6 +84,14 @@ define({
   "mu-switch": class AppSwitch extends Switch.Element {
     constructor() {
       super(routes, "blazing:history", "blazing:auth");
+    }
+  },
+  "mu-store": class AppStore extends Store.Provider<
+    Model,
+    Msg
+  > {
+    constructor() {
+      super(update, init, "blazing:auth");
     }
   }
 });

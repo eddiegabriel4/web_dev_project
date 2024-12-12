@@ -15,7 +15,11 @@ export default function update(
         apply((model) => ({ ...model, profile }))
       );
       break;
-    // put the rest of your cases here
+    case "trail/save":
+        saveTrail(message[1], user).then((profile) =>
+        apply((model) => ({ ...model, profile }))
+      );
+      break;
     default:
       const unhandled: never = message[0];
       throw new Error(`Unhandled Auth message "${unhandled}"`);
@@ -41,4 +45,29 @@ function findTrail(
           return json as Trail;
         }
       });
+  }
+
+
+  function saveTrail(
+    msg: {
+      trailID: string;
+      trail: Trail;
+    },
+    user: Auth.User
+  ) {
+    return fetch(`/api/trails/${msg.trailID}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        ...Auth.headers(user),
+      },
+      body: JSON.stringify(msg.trail),
+    })
+      .then((response: Response) => {
+        if (response.status === 200) return response.json();
+        throw new Error(
+          `Failed to save trail for ${msg.trailID}`
+        );
+      })
+      .then((json: unknown) => json as Trail);
   }

@@ -16,11 +16,10 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-//const staticDir = process.env.STATIC || path.resolve(__dirname, "../proto/public");
+const staticDir = process.env.STATIC || path.resolve(__dirname, "../proto/public");
+app.use(express.static(staticDir));
 
-//app.use(express.static(staticDir));
-
-app.use(express.static("../proto/public"));
+//app.use(express.static("../proto/public"));
 
 
 app.use("/auth", auth);

@@ -35,7 +35,8 @@ var import_path = __toESM(require("path"));
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 app.use(import_express.default.json());
-app.use(import_express.default.static("../proto/public"));
+const staticDir = process.env.STATIC || import_path.default.resolve(__dirname, "../proto/public");
+app.use(import_express.default.static(staticDir));
 app.use("/auth", import_auth.default);
 app.use("/api/trails", import_auth.authenticateUser, import_trails.trails);
 app.get("/trails/:trailId", (req, res) => {

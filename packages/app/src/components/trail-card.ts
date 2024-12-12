@@ -8,8 +8,6 @@ export class TrailCard extends LitElement {
   @state() private _user: Auth.User = new Auth.User();
   @state() private slots: Record<string, string> = {};
 
-  @state() private userId: string = "hiker";
-
   private _authObserver = new Observer<Auth.Model>(this, "blazing:auth");
 
   static styles = css`
@@ -81,7 +79,6 @@ export class TrailCard extends LitElement {
       
       if (user) {
         this._user = user;
-        this.loadUserId();
       }
 
       if (user?.authenticated && this.src) {
@@ -89,19 +86,7 @@ export class TrailCard extends LitElement {
       }
     });
 
-    this.loadUserId();
   }
-
-private loadUserId() {
-    console.log("Loading user ID...");
-    const user = this._user;
-    if (user && user.username) {
-        console.log("User found:", user.username);
-        this.userId = user.username;
-    } else {
-        this.userId = "hiker";
-    }
-}
 
   private hydrate(url: string): void {
     fetch(url, { headers: Auth.headers(this._user) })

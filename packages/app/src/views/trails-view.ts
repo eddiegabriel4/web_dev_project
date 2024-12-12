@@ -3,21 +3,24 @@ import { html, LitElement } from "lit";
 import { state } from "lit/decorators.js";
 import { Trail } from "server/models";
 
-export class HomeViewElement extends LitElement {
+export class TrailViewElement extends LitElement {
     src = "/api/trails";
 
     @state()
     trailIndex: Array<Trail> = [];
 
     render() {
+        const trailList = this.trailIndex?.length
+            ? this.trailIndex.map(this.renderItem)
+            : html`<p>Loading trails...</p>`;
 
         return html`
         <main class="page">
         <header>
-          <h1>Welcome to the center for all things trails in the Pacific Northwest</h1>
-          <p>
-            <a href="/app/trails">Click here to see all trails</a>
-          </p>
+          <h1>Here are all the trails</h1>
+          <section class="trail-list">
+                ${trailList}
+        </section>
         </header>
       </main>
     `;
@@ -40,6 +43,7 @@ export class HomeViewElement extends LitElement {
                 throw `Server responded with status ${res.status}`;
             })
             .then((json: Array<Trail>) => {
+                console.log(json);
                 this.trailIndex = json || [];
             })
             .catch((err) => console.error("Failed to fetch trail data:", err));

@@ -1,6 +1,6 @@
 // app/vite.config.js
 export default {
-  publicDir: "../proto/public", // Path to your proto/public directory
+  publicDir: "../proto/public",
   server: {
     proxy: {
       "/api": "http://localhost:3000",

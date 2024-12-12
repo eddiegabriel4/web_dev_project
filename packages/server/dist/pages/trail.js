@@ -63,9 +63,7 @@ class TrailPage {
   renderBody() {
     const { name, description, location } = this.data;
     return import_server.html`
-            <trail-card src="/api/trails/${name}">
-                <!-- Remove or comment out slot content -->
-            </trail-card>
+            <trail-card src="/api/trails/${name}"></trail-card>
         `;
   }
 }
